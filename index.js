@@ -1,10 +1,13 @@
 const { developerToken } = require('./keys')
 const Evernote = require('evernote')
-var client = new Evernote.Client({token: developerToken});
+var client = new Evernote.Client(
+  {
+    token: developerToken,
+    sandbox: false // This flag is needed if using a production developer token
+  });
 
 // Set up the NoteStore client 
 var noteStore = client.getNoteStore();
-
 
 // How to list notebooks
 
@@ -36,7 +39,7 @@ noteStore.createNote(ourNote)
 // how to read notes
 
 var filter = new Evernote.NoteStore.NoteFilter({
-  words: 'Hello',
+  words: 'first',
   ascending: true
 });
 var spec = new Evernote.NoteStore.NotesMetadataResultSpec({
